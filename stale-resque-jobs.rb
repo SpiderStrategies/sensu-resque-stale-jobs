@@ -55,7 +55,7 @@ class RedisChecks < Sensu::Plugin::Check::CLI
       # puts key, redis.smembers(key)
       #TODO This is expensive for lots of timestamps
       redis.smembers(key).each do |timestamp|
-        t = Time.at(timestamp.split(':')[2].to_i)
+        t = Time.at(timestamp.split(':')[1].to_i)
         if (t < staleCrit)
           critical "CRITICAL: Resque queue timestamp #{key}, has a timestamp of #{t}!"
         elsif (t < staleCrit)
